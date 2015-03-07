@@ -3,7 +3,7 @@ SPOTIFY_URL = "spotify:user:andy.kent:playlist:2AerYjAygaivqTW4XLGqau"
 SPOTIFY_USERNAME = "andy.kent"
 PLAYLIST_ID = SPOTIFY_URL.split('playlist:')[1]
 
-class SpotifySandbox
+class Spotify
 
   def initialize
     spotify_playlist = get_playlist
