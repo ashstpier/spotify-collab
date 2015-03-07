@@ -8,7 +8,8 @@ class CreateTracks < ActiveRecord::Migration
       t.string :thumbnail
       t.string :spotify_id
       t.string :spotify_uri
-      t.time :duration
+      t.integer :duration
+      t.references :playlist
 
       t.timestamps null: false
     end

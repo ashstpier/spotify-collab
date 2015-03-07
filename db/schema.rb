@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 20150307003033) do
 
   create_table "playlists", force: :cascade do |t|
     t.string   "spotify_id"
+    t.string   "spotify_uri"
     t.string   "name"
     t.string   "owner"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -31,7 +32,8 @@ ActiveRecord::Schema.define(version: 20150307003033) do
     t.string   "thumbnail"
     t.string   "spotify_id"
     t.string   "spotify_uri"
-    t.time     "duration"
+    t.integer  "duration"
+    t.integer  "playlist_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

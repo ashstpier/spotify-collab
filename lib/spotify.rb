@@ -6,10 +6,12 @@ PLAYLIST_ID = SPOTIFY_URL.split('playlist:')[1]
 class SpotifySandbox
 
   def initialize
-    playlist = get_playlist
-    create_playlist(playlist)
+    spotify_playlist = get_playlist
+    playlist = create_playlist(spotify_playlist)
 
-    puts Playlist.first.owner
+    spotify_playlist.tracks.each do |track|
+      add_track(track, playlist)
+    end
   end
 
   private
@@ -19,9 +21,22 @@ class SpotifySandbox
   end
 
   def create_playlist(playlist)
-    Playlist.find_or_create_by({ spotify_id: PLAYLIST_ID }) do |new_playlist|
+    Playlist.find_or_create_by({ spotify_id: playlist.id }) do |new_playlist|
       new_playlist.name = playlist.name
+      new_playlist.spotify_uri = playlist.uri
       new_playlist.owner = playlist.owner.id
+    end
+  end
+
+  def add_track(track, playlist)
+    Track.find_or_create_by({ spotify_id: track.id }) do |new_track|
+      new_track.name = track.name
+      new_track.spotify_uri = track.uri
+      new_track.duration = track.duration_ms
+      new_track.album = track.album.name
+      new_track.thumbnail = track.album.images[1]["url"] if track.album.images.length > 0
+      new_track.artists = track.artists.map { |artist| artist.name }
+      new_track.playlist_id = playlist.id
     end
   end
 
