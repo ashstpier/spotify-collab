@@ -27,23 +27,24 @@ ActiveRecord::Schema.define(version: 20150307191636) do
 
   create_table "tracks", force: :cascade do |t|
     t.string   "name"
-    t.string   "artists",                  array: true
+    t.string   "artists",                              array: true
     t.string   "album"
     t.string   "thumbnail"
     t.string   "spotify_id"
     t.string   "spotify_uri"
     t.integer  "duration"
+    t.integer  "votes",       default: 0
     t.integer  "playlist_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.string   "spotify_id"
     t.string   "spotify_uri"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "spotify_hash"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

@@ -9,6 +9,7 @@ class CreateTracks < ActiveRecord::Migration
       t.string :spotify_id
       t.string :spotify_uri
       t.integer :duration
+      t.integer :votes, :default => 0
       t.references :playlist
 
       t.timestamps null: false

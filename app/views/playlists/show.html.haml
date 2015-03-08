@@ -8,10 +8,12 @@
             %th Artist
             %th Album
             %th Duration
+            %th Added
         %tbody
           - @playlist.tracks.each do |track|
             %tr
-              %td= track.name
+              %td= image_tag track.thumbnail, {width: "100px"}
               %td= track.artists[0]
               %td= track.album
               %td= number_with_precision(track.duration.to_f / 1000 / 60, :precision => 2)
+              %td= time_ago_in_words(track.created_at)

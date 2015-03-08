@@ -1,1 +1,17 @@
-= @spotify_user.to_json
+.container
+  .row
+    .col-md-12
+      %table.table
+        %thead
+          %tr
+            %th Track
+            %th Artist
+            %th Album
+            %th Duration
+        %tbody
+          - @spotify_library.each do |track|
+            %tr
+              %td= track.name
+              %td= track.artists.map {|a| a.name}.join(',')
+              %td= track.album.name
+              %td= number_with_precision(track.duration_ms.to_f / 1000 / 60, :precision => 2)
